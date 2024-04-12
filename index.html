@@ -65,6 +65,11 @@
     <button onclick="copyText(text7)">prc6 K-means</button>
     <button onclick="copyText(text8)">prc7 Decision Tree</button>
     <button onclick="copyText(text9)">prc8 hierarchical clustering</button>
+    <button onclick="copyText(text10)">assign1 </button>
+    <button onclick="copyText(text11)">assign2 </button>
+    <button onclick="copyText(text12)">assign3 </button>
+    <button onclick="copyText(text13)">assign4 </button>
+    <button onclick="copyText(text14)">assign5 </button>
     <p id="copiedMsg"></p>
     <script>
         var text1 = `
@@ -351,6 +356,111 @@ if linkage == 'ward' and g != None:
 else:
     print("Not aplicable...")
 
+`;
+               var text10 = `
+ import numpy as np 
+ import pandas as pd 
+ from sklearn.metrics import confusion_matrix 
+ data = pd.read_csv("C:/Users/hp/Desktop/KC MScIT Part 1/Sem 2/DS/Assignment/assignment1.1.csv") 
+ data.head(10) 
+ cm = confusion_matrix(data['Actual'],data['Predicted']) 
+ print(cm) 
+ import seaborn as sns 
+ import matplotlib.pyplot as plt 
+ sns.heatmap(cm,annot=True,fmt='G',xticklabels = ['apple','mango'],yticklabels = ['apple','mango']) 
+ plt.ylabel('Predicted') 
+ plt.xlabel('Actual') 
+ plt.show()
+`;
+
+               var text11 = `
+ import numpy as np 
+ import pandas as pd 
+ from sklearn.metrics import confusion_matrix 
+ data = pd.read_csv("C:/Users/hp/Desktop/KC MScIT Part 1/Sem 2/DS/Assignment/assignment2.csv") 
+ data.head(10) cm = confusion_matrix(data['Actual'],data['Predicted']) 
+ print(cm) 
+ import seaborn as sns 
+ import matplotlib.pyplot as plt 
+ sns.heatmap(cm,annot=True,fmt='G',xticklabels = ['apple','mango','orange'],yticklabels = ['apple','mango','orange']) 
+ plt.ylabel('Predicted') 
+ plt.xlabel('Actual') 
+ plt.show()
+ `;
+               var text12 = `
+ import pandas as pd 
+ import numpy as np 
+ from sklearn.model_selection 
+ import train_test_split,cross_val_score 
+ from sklearn.preprocessing import StandardScaler 
+ from sklearn.metrics import classification_report, confusion_matrix 
+ data = pd.read_csv(r"C:\Users\hp\Desktop\KC MScIT Part 1\Sem 1\AAI\Practical\iris.csv") 
+ data.head() 
+ data.variety.unique() 
+ x = data[['sepal.length','sepal.width','petal.length','petal.width']] 
+ y = data['variety'] xtrain,xtest,ytrain,ytest = train_test_split(x,y,test_size=0.2) 
+ Scaler = StandardScaler() 
+ xtrain = Scaler.fit_transform(xtrain) 
+ xtest = Scaler.fit_transform(xtest) 
+ from sklearn.ensemble import RandomForestClassifier 
+ model = RandomForestClassifier(n_estimators=100,random_state=40) 
+ model.fit(xtrain,ytrain) ypred = model.predict(xtest) 
+ cm = confusion_matrix(ytest,ypred) 
+ cr = classification_report(ytest,ypred) 
+ print('confusion_matrix:',cm) 
+ print('\nclassification_report:',cr) 
+ cvs = cross_val_score(model,x,y,cv=5) 
+ print('cross_val_score:',cvs) 
+ print('\nMean:',np.mean(cvs)) 
+`;
+               var text13 = `
+from sklearn.model_selection import train_test_split 
+from sklearn.feature_extraction.text import TfidfVectorizer 
+from sklearn.multioutput import MultiOutputClassifier 
+from sklearn.naive_bayes import MultinomialNB 
+from sklearn.metrics import accuracy_score, classification_report 
+document = ["This is a positive document about technologies","negative statements towards politics in this document","A positive review of a new movie release","This document talks about technologies and politics","No specific statement in the genersl document"] 
+label = {'technologies':[1,0],'politics':[0,1],'positive_statement':[1,0],'negative_statement':[0,1]} 
+y = [label['technologies'],label['politics'],label['positive_statement'],label['technologies']+label['politics'],[]] 
+xtrain,xtest,ytrain,ytest = train_test_split(document,y,test_size=0.2) 
+v = TfidfVectorizer() 
+xtrain_Tfidf = v.fit_transform(xtrain) 
+xtest_Tfidf = v.transform(xtest) 
+from sklearn.preprocessing import MultiLabelBinarizer 
+mlb = MultiLabelBinarizer() 
+ytrain = mlb.fit_transform(ytrain) 
+ytest = mlb.fit_transform(ytest) 
+model = MultiOutputClassifier(MultinomialNB()) 
+model.fit(xtrain_Tfidf,ytrain) 
+ypred = model.predict(xtest_Tfidf) 
+accuracy = accuracy_score(ytest,ypred) 
+cr = classification_report(ytest,ypred) 
+print("accuracy_score: ",accuracy) 
+print("\nclassification_report: ",cr)
+`;
+               var text14 = `
+import pandas as pd 
+import numpy as np 
+from scipy import stats 
+data = pd.read_csv(r"C:\Users\hp\Desktop\KC MScIT Part 1\Sem 2\ML\Assignment\employee_happiness_dataset.csv") 
+data.head(10) 
+x = data['Salary'] 
+y = data['Happiness'] 
+# Calculating the corelation coefficient 
+c = stats.pearsonr(x,y)[0] 
+ print('C:',c) 
+if c>0.7: 
+  print('Strong Positive Correlation') 
+elif c>0.4: 
+  print('Moderate Positive Correlation') 
+elif c>0: 
+  print('Weak Positive Correlation') 
+elif c<0 and c>-0.4:
+  print('Weak Negative Correlation') 
+elif c<-0.7: 
+  print('Moderate Negative Correlation') 
+else: 
+  print('No Correlation')
 `;
         function copyText(text) {
             navigator.clipboard.writeText(text).then(function () {
