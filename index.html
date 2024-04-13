@@ -62,10 +62,11 @@
     <button onclick="copyText(text4)">prc2B k-Nearest Neighbor  </button>
     <button onclick="copyText(text5)">prc3 Bayesian network </button>
     <button onclick="copyText(text6)">prc4 K-Means Clustering</button>
-    <button onclick="copyText(text7)">prc5 Data Visualization </button>
+    <button onclick="copyText(text7)">prc5 Data Visualization python</button>
     <button onclick="copyText(text8)">prc6 Pie Diagram, Bar Chart Diagram</button>
     <button onclick="copyText(text9)">prc7 ETL process </button>
-    <button onclick="copyText(text10)">prc8 Data visualization </button>
+    <button onclick="copyText(text10)">prc8 Data visualization libraries</button>
+     <button onclick="copyText(text11)">prc9 Decision Tree Classifier </button>
     <p id="copiedMsg"></p>
     <script>
         var text1 = `
@@ -397,7 +398,28 @@ fig.show()
 
 
 `;
-
+                var text11 = `
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.tree import DecisionTreeClassifier, plot_tree
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+print("Ummara Ashrafi KFMSCIT040")
+data = pd.read_csv('iris.csv')
+print(data.head())
+X = data.drop('species', axis=1)
+y = data['species']
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+model = DecisionTreeClassifier()
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
+accuracy = accuracy_score(y_test, y_pred)
+print(f"Accuracy: {accuracy:.2f}")
+plt.figure(figsize=(12, 8))
+plot_tree(model, filled=True, feature_names=X.columns.tolist(), class_names=y.unique().tolist())
+plt.title("Decision Tree Visualization")
+plt.show()
+`;
         function copyText(text) {
             navigator.clipboard.writeText(text).then(function () {
                 document.getElementById('copiedMsg').innerHTML = "Text Copied"
