@@ -56,64 +56,131 @@
 
 <body>
 
-    <button onclick="copyText(text1)">prc1A KNN classifier </button>
-    <button onclick="copyText(text2)">prc1B K-means clustering</button>
-    <button onclick="copyText(text3)">prc2 Naïve Bayes</button>
-    <button onclick="copyText(text4)">prc3 polynomial regression </button>
-    <button onclick="copyText(text5)">prc4 Linear Regression</button>
-    <button onclick="copyText(text6)">prc5 Multiclass classification.</button>
-    <button onclick="copyText(text7)">prc6 K-means</button>
-    <button onclick="copyText(text8)">prc7 Decision Tree</button>
-    <button onclick="copyText(text9)">prc8 hierarchical clustering</button>
-    <button onclick="copyText(text10)">assign1 </button>
-    <button onclick="copyText(text11)">assign2 </button>
-    <button onclick="copyText(text12)">assign3 </button>
-    <button onclick="copyText(text13)">assign4 </button>
-    <button onclick="copyText(text14)">assign5 </button>
+    <button onclick="copyText(text1)">prc1A Linear Regresssion</button>
+    <button onclick="copyText(text2)">prc1B Logistic Regression</button>
+    <button onclick="copyText(text3)">prc2A R programming</button>
+    <button onclick="copyText(text4)">prc2B k-Nearest Neighbor  </button>
+    <button onclick="copyText(text5)">prc3 Bayesian network </button>
+    <button onclick="copyText(text6)">prc4 K-Means Clustering</button>
+    <button onclick="copyText(text7)">prc5 Data Visualization </button>
+    <button onclick="copyText(text8)">prc6 Pie Diagram, Bar Chart Diagram</button>
+    <button onclick="copyText(text9)">prc7 ETL process </button>
+    <button onclick="copyText(text10)">prc8 Data visualization </button>
     <p id="copiedMsg"></p>
     <script>
         var text1 = `
-import numpy as np
-import pandas as pd
-from sklearn.datasets import load_iris
-from sklearn.model_selection import train_test_split
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.metrics import accuracy_score,classification_report,precision_score
+import random
+from sklearn.linear_model import LinearRegression
+rows = 200
+limits = 2000
+featureSet = []
+targetSet = []
 
-Iris = load_iris()
-X,Y =  Iris.data ,Iris.target
-X_train,X_test , Y_train , Y_test  = train_test_split(X,Y,test_size=0.3)
+for i in range(0,rows):
+    x = random.randint(0,limits)
+    y = random.randint(0,limits)
+    z = random.randint(0,limits)
+    g = ((10*x)+(2*y)+(3*z))
+    print(i+1,". ",x," ",y," ",z," = ",g)
+    print("==========================================")
+    featureSet.append([x,y,z])
+    targetSet.append(g)
 
-KNeighbors_Classifier = KNeighborsClassifier(n_neighbors=3)
+model = LinearRegression(
+model.fit(featureSet,targetSet)
+test_data = [[1,2,3]]
+prediction = model.predict(test_data)
+print("Prediction: ",prediction," Cofficient: ",model.coef_)
 
-#Train  the model under training data
-KNeighbors_Classifier.fit(X_train,Y_train)
-#Make prediction on a test data
-Y_pred =  KNeighbors_Classifier.predict(X_test)
-#Evaluate the model accuracy
-accuracy =  accuracy_score(Y_test,Y_pred)
-print(accuracy)
 `;
 
         var text2 = `
-import matplotlib.pyplot as plt
-from sklearn.cluster import KMeans
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import confusion_matrix,accuracy_score
+dataset = pd.read_csv("diabetes.csv")
+print(dataset.head())
+x = dataset.iloc[:,[0,1,2,3,4,5,6,7]].values
+y = dataset.iloc[:,[-1]].values.ravel()
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=100)
+sc = StandardScaler()
+x_train = sc.fit_transform(x_train)
+x_test = sc.transform(x_test)
+print("************** x_train ***********")
+print(x_train[1])
+model = LogisticRegression()
+model.fit(x_train, y_train)
+y_pred = model.predict(x_test)
+cm = confusion_matrix(y_test, y_pred)
+print("Confusion Matrix :\n ", cm)
+print("Accuracy :", accuracy_score(y_test, y_pred) * 100)
 
-Iris = load_iris()
-X,Y =  Iris.data ,Iris.target
-X_train,X_test , Y_train , Y_test  = train_test_split(X,Y,test_size=0.3)
-
-Kmeans=  KMeans(n_clusters=3,random_state=42)
-Kmeans.fit(X)
-
-cluster_label = Kmeans.labels_
-
-plt.scatter(X[:,0],X[:,1],c=cluster_label,cmap='viridis')
-plt.xlabel("Sepal Length")
-plt.ylabel("Sepal widht")
-plt.show()
 `;
         var text3 = `
+name <- "Your Name"
+rollNo <- "roll no "
+cat("Name: ",name,"\nRoll No: ",rollNo)
+ 
+plot(1:10,type="l",col="green") 
+
+plot(1,4, col="red")
+plot(c(2,3),c(4,6) ,col="blue")
+
+ 
+plot(c(1,3),c(5,10))
+ 
+plot(1:10,type="l",col="green")
+
+ 
+#Bar Charts
+x<-c("A","B","C")
+y<-c(2,4,6)
+barplot(y,main="Bar Chart",names.arg = x,col="blue") 
+
+#Scatter plots
+x<-c(5,7,8,7,2,2,9,4,11,12,9,6)
+y<-c(99,86,87,88,111,103,87,94,78,77,85,88)
+plot(x,y)
+plot(x,y,main="Scatter Plot",xlab="Car age",ylab="Car Speed")
+ 
+line1<-c(1,2,3,4,5,10)
+line2<-c(2,5,7,8,9,10)
+plot(line1,main="Line plot",type="l",col="red")
+lines(line2,type="l",col="blue")
+`;
+
+        var text4 = `
+import matplotlib.pyplot as plt
+from sklearn.neighbors import KNeighborsClassifier
+#Data Set
+x = [4, 5, 10, 4, 3, 11, 14 , 8, 10, 12]
+y = [21, 19, 24, 17, 16, 25, 24, 22, 21, 21]
+classes = [0, 0, 1, 0, 0, 1, 1, 0, 1, 1]
+#To plot data set
+plt.scatter(x, y, c=classes)
+plt.show()
+ 
+#To merge x and y into single list
+data = list(zip(x, y))
+print(data)
+#model creation
+model = KNeighborsClassifier(n_neighbors=1)
+# Model is trained
+model.fit(data, classes)
+
+new_x = 8
+new_y = 21
+new_point = [(new_x, new_y)]
+prediction = model.predict(new_point)
+
+plt.scatter(x + [new_x], y + [new_y], c=classes + [prediction[0]])
+plt.text(x=new_x-1.7, y=new_y-0.7, s=f"new point, class: {prediction[0]}")
+plt.show()
+
+
+        var text5 = `
 import pandas as pd
 from pgmpy.estimators import MaximumLikelihoodEstimator
 from pgmpy.models import BayesianModel
@@ -131,7 +198,7 @@ model = BayesianModel([
     ('cholestrol', 'heartdisease'),
     ('diet', 'cholestrol')
 ])
-
+ 
 model.fit(heart_disease, estimator=MaximumLikelihoodEstimator)
 
 HeartDisease_infer = VariableElimination(model)
@@ -142,7 +209,7 @@ print('For Family History enter Yes:1, No:0')
 print('For Diet enter High:0, Medium:1')
 print('for LifeStyle enter Athlete:0, Active:1, Moderate:2, Sedentary:3')
 print('for Cholesterol enter High:0, BorderLine:1, Normal:2')
-
+ 
 q = HeartDisease_infer.query(variables=['heartdisease'], 
     evidence={
     'age': int(input('Enter Age: ')),
@@ -154,314 +221,183 @@ q = HeartDisease_infer.query(variables=['heartdisease'],
 })
 
 print(q)
-`;
-
-        var text4 = `
-import numpy as np
-import matplotlib.pyplot as plt
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import PolynomialFeatures
-from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_squared_error
-
-# Generate synthetic data
-np.random.seed(0)
-X = np.linspace(0, 5, 100).reshape(-1, 1)
-Y = 2 * np.sin(X) + np.random.normal(0, 0.5, size=X.shape)
-
-# Split data into training and testing sets
-X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=42)
-
-# Define a function to fit polynomial regression models of varying degrees
-def fit_polynomial(X_train, Y_train, X_test, Y_test, degree):
-    poly = PolynomialFeatures(degree=degree)
-    X_train_poly = poly.fit_transform(X_train)
-    X_test_poly = poly.transform(X_test)
-
-    model = LinearRegression()
-    model.fit(X_train_poly, Y_train)
-
-    train_rmse = np.sqrt(mean_squared_error(Y_train, model.predict(X_train_poly)))
-    test_rmse = np.sqrt(mean_squared_error(Y_test, model.predict(X_test_poly)))
-
-    return model, train_rmse, test_rmse
-
-# Fit polynomial regression models of varying degrees
-degrees = [1, 3, 10]
-models = []
-train_rmse_values = []
-test_rmse_values = []
-
-for degree in degrees:
-    model, train_rmse, test_rmse = fit_polynomial(X_train, Y_train, X_test, Y_test, degree)
-    models.append(model)
-    train_rmse_values.append(train_rmse)
-    test_rmse_values.append(test_rmse)
-
-# Plot the results
-plt.figure(figsize=(10, 6))
-plt.scatter(X_train, Y_train, color='blue', label='Training Data')
-plt.scatter(X_test, Y_test, color='green', label='Testing Data')
-
-x_values = np.linspace(0, 5, 100).reshape(-1, 1)
-for i, model in enumerate(models):
-    y_values = model.predict(PolynomialFeatures(degree=degrees[i]).fit_transform(x_values))
-    plt.plot(x_values, y_values, label=f'Degree {degrees[i]}')
-
-
-plt.title('Polynomial Regression with Different Degrees')
-plt.xlabel('X')
-plt.ylabel('Y')
-plt.legend()
-plt.show()
-`;
-
-        var text5 = `
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_squared_error,r2_score
-
-df = pd.read_csv("Salary_Data.csv")
-df.head()
-
-x=df['YearsExperience'].values.reshape(-1,1)
-y=df['Salary'].values
-
-X_train,X_test , Y_train , Y_test  = train_test_split(x,y,test_size=0.2)
-
-r1 = LinearRegression()
-r1.fit(X_train,Y_train)
-y_pred = r1.predict(X_test)
-print(y_pred)
-
-MSE = mean_squared_error(Y_test,y_pred)
-r2 = r2_score(Y_test,y_pred)
-print('MSE',MSE)
-print('r2' , r2)
-
-plt.scatter(X_test,Y_test,color='blue',label='Actual')
-plt.plot(X_test,y_pred,color='red',label='Predict')
-plt.xlabel('year od experience')
-plt.ylabel('salary')
-plt.legend()
-plt.show()
 
 `;
 
         var text6 = `
-from sklearn.datasets import load_iris
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score,recall_score,f1_score,precision_score
+import matplotlib.pyplot as plt
+from sklearn.cluster import KMeans
 
-# step 1 : load the iris dataset
+x = [4, 5, 10, 4, 3, 11, 14 , 6, 10, 12]
+y = [21, 19, 24, 17, 16, 25, 24, 22, 21, 21]
 
-iris = load_iris()
-x = iris.data
-y = iris.target
+plt.scatter(x, y)
+plt.show()
+print("Ummara Ashrafi KFMSCIT040")
+data = list(zip(x, y))
 
-xtrain,xtest,ytrain,ytest = train_test_split(x,y,test_size=0.2)
+kmeans = KMeans(n_clusters=2)
+kmeans.fit(data)
 
-from sklearn.svm import SVC
-model = SVC()
-model.fit(xtrain,ytrain)
-modelPredict = model.predict(xtest)
-
-aS = accuracy_score(modelPredict,ytest)
-f1 = f1_score(modelPredict,ytest,average='macro')
-rs = recall_score(modelPredict,ytest,average='macro')
-ps = precision_score(modelPredict,ytest,average='macro')
-
-
-print("accuracy_score: ",aS)
-print("recall_score: ",rs)
-print("precision_score: ",ps)
-print("f1_score: ",f1)
+plt.scatter(x, y, c=kmeans.labels_)
+plt.show()
 `;
 
         var text7 = `
-import numpy as np
+Code 1:
+import pandas as pd
 
-# sample data representating flower location
-data = np.array([[1,2],[1.5,1.8],[5,8],[8,8],[1,0.5],[7,9],[9,10],[5.5,8.5]])
+# reading the database
+data = pd.read_csv("tips.csv")
 
-# define the number of cluster
-k = 3
+display(data.head(10))
 
-# impementing algo
-from sklearn.cluster import KMeans
-kmean = KMeans(n_clusters=k)
-
-# Traning algo
-kmean.fit(data)
-cluster_label = kmean.predict(data)
-
-# ploting
+Code 2:
+import pandas as pd
 import matplotlib.pyplot as plt
-plt.scatter(data[:,0],data[:,1],c=cluster_label)
-plt.xlabel('X Co-ordinates')
-plt.ylabel('Y Co-ordinates')
-plt.title('K Mean Clustering (K = '+str(k)+")")
+
+data = pd.read_csv("tips.csv")
+
+plt.scatter(data['day'], data['tip'])
+plt.title("Scatter Plot  ")
+
+plt.xlabel('Day')
+plt.ylabel('Tip')
+plt.show()
+
+
+Code 3:
+import pandas as pd
+import matplotlib.pyplot as plt
+
+data = pd.read_csv("tips.csv")
+
+plt.scatter(data['day'], data['tip'], c=data['size'], s=data['total_bill'])
+
+plt.title("Scatter Plot  ")
+
+plt.xlabel('Day')
+plt.ylabel('Tip')
+plt.colorbar()
 plt.show()
 `;
 
         var text8 = `
+Code 1: 
 import pandas as pd
 import matplotlib.pyplot as plt
-from sklearn.tree import DecisionTreeClassifier, plot_tree
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
 
 
-data = pd.read_csv('iris.csv')
-print(data.head())
+# reading the database
+data = pd.read_csv("tips.csv")
 
-X = data.drop('variety', axis=1)
-y = data['variety']
+# Bar chart with day against tip
+plt.bar(data['day'], data['tip'])
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+# Setting the X and Y labels
+plt.xlabel('Day')
+plt.ylabel('Tip')
 
-model = DecisionTreeClassifier()
-model.fit(X_train, y_train)
+# Adding the legends
+plt.show()
+ 
+Code 2:
+import numpy as np
+import matplotlib.pyplot as plt
+y = np.array([35,25,25,15])
 
-y_pred = model.predict(X_test)
-accuracy = accuracy_score(y_test, y_pred)
-print(f"Accuracy: {accuracy:.2f}")
+plt.pie(y)
+plt.show()
 
-plt.figure(figsize=(12, 8))
-plot_tree(model, filled=True, feature_names=X.columns.tolist(), class_names=y.unique().tolist())
-plt.title("Decision Tree Visualization")
+
+Code 3:
+import numpy as np
+import matplotlib.pyplot as plt
+y = np.array([35,25,25,15])
+mylabels = ["Finance", "Marketing","Sales","Logestic"]
+mycolors = ["black","hotpink","b","gray"]
+
+plt.pie(y, labels = mylabels, colors = mycolors)
 plt.show()
 `;
 
         var text9 = `
-import numpy as np
-from sklearn.cluster import AgglomerativeClustering # this clustering is used for hirerchical clustering
-from sklearn.metrics import completeness_score, silhouette_score
+import requests
+from bs4 import BeautifulSoup
+def check_word_in_webpage(url, word):
+    response = requests.get(url)
 
-data = np.array([[1,1],[5,5],[8,8],[1,0],[5,4],[8,1]])
+    if response.status_code == 200:
 
-linkage = 'ward'
-model = AgglomerativeClustering(linkage=linkage,n_clusters=3)
-model.fit(data)
-cluster_label = model.labels_
-s = silhouette_score(data,cluster_label) #positive is good and negative value is bad 
-print("silhouette_score: ",s)
-g = None
-if linkage == 'ward' and g != None:
-    c = completeness_score(g,cluster_label)
-    print("completeness_score: ",c)
-else:
-    print("Not aplicable...")
+        soup = BeautifulSoup(response.content, 'html.parser')
+        text_content = soup.get_text()
+
+        if word.lower() in text_content.lower():
+            print(f"The word '{word}' is present in the webpage.")
+        else:
+            print(f"The word '{word}' is not present in the webpage.")
+    else:
+        print("Failed to retrieve webpage.")
+
+url = input("Enter the url you want to Scrap :  ")
+word_to_check = input("Enter the text you want to know which is present or not :  ")
+check_word_in_webpage(url, word_to_check)
+
 
 `;
-               var text10 = `
- import numpy as np 
- import pandas as pd 
- from sklearn.metrics import confusion_matrix 
- data = pd.read_csv("C:/Users/hp/Desktop/KC MScIT Part 1/Sem 2/DS/Assignment/assignment1.1.csv") 
- data.head(10) 
- cm = confusion_matrix(data['Actual'],data['Predicted']) 
- print(cm) 
- import seaborn as sns 
- import matplotlib.pyplot as plt 
- sns.heatmap(cm,annot=True,fmt='G',xticklabels = ['apple','mango'],yticklabels = ['apple','mango']) 
- plt.ylabel('Predicted') 
- plt.xlabel('Actual') 
- plt.show()
+       var text10 = `
+Code 1:
+#STEP -1 : Import Libraries
+import pandas as pd
+import matplotlib. pyplot as plt
+#Uploading Dataset
+data = pd.read_csv("Nifty.csv")
+print(data)
+
+#Plotting of x-axis & y-axis plot
+plt. plot(data['Open '],marker = "o",markeredgecolor="white", markerfacecolor="blue")
+plt. plot(data['Close '],marker = "o",markeredgecolor="white", markerfacecolor="orange")
+plt.grid()
+plt. title("Line Plot of NIFTY-50 by using Matplotlib")
+plt. xlabel('Open ')
+plt. ylabel('Close ')
+plt.legend(['Open', 'Close'])
+plt. show()
+
+Code 2:
+#DATA VISUALIZATION USING SEABORN
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+# Load dataset
+data = pd.read_csv("Nifty.csv")
+# Plotting
+plt.figure(figsize=(10, 6))
+sns.lineplot(data=data[['Open ', 'Close ']], markers=True, marker='o', markeredgecolor="white", palette=['green', 'red'])
+plt.title("Line Plot of NIFTY-50 by using Seaborn")
+plt.xlabel('Index')
+plt.ylabel('Price')
+plt.grid(True)
+plt.show()
+
+Code 3:
+#DATA VISUALIZATION USING PLOTLY
+import pandas as pd
+import plotly.express as px
+# Load dataset
+data = pd.read_csv("Nifty.csv")
+# Plotting
+fig = px.line(data, x=data.index, y=['Open ', 'Close '], markers=True,
+              title="Line Plot of NIFTY-50 using Plotly", labels={'index': 'Index', 'value': 'Price'},
+              color_discrete_sequence=['green', 'red'])
+
+fig.update_layout(legend_title='Price', legend=dict(x=0, y=1, traceorder='normal'),
+                  plot_bgcolor='rgba(0,0,0,0)')
+fig.show()
+
+
 `;
 
-               var text11 = `
- import numpy as np 
- import pandas as pd 
- from sklearn.metrics import confusion_matrix 
- data = pd.read_csv("C:/Users/hp/Desktop/KC MScIT Part 1/Sem 2/DS/Assignment/assignment2.csv") 
- data.head(10) cm = confusion_matrix(data['Actual'],data['Predicted']) 
- print(cm) 
- import seaborn as sns 
- import matplotlib.pyplot as plt 
- sns.heatmap(cm,annot=True,fmt='G',xticklabels = ['apple','mango','orange'],yticklabels = ['apple','mango','orange']) 
- plt.ylabel('Predicted') 
- plt.xlabel('Actual') 
- plt.show()
- `;
-               var text12 = `
- import pandas as pd 
- import numpy as np 
- from sklearn.model_selection 
- import train_test_split,cross_val_score 
- from sklearn.preprocessing import StandardScaler 
- from sklearn.metrics import classification_report, confusion_matrix 
- data = pd.read_csv(r"C:\Users\hp\Desktop\KC MScIT Part 1\Sem 1\AAI\Practical\iris.csv") 
- data.head() 
- data.variety.unique() 
- x = data[['sepal.length','sepal.width','petal.length','petal.width']] 
- y = data['variety'] xtrain,xtest,ytrain,ytest = train_test_split(x,y,test_size=0.2) 
- Scaler = StandardScaler() 
- xtrain = Scaler.fit_transform(xtrain) 
- xtest = Scaler.fit_transform(xtest) 
- from sklearn.ensemble import RandomForestClassifier 
- model = RandomForestClassifier(n_estimators=100,random_state=40) 
- model.fit(xtrain,ytrain) ypred = model.predict(xtest) 
- cm = confusion_matrix(ytest,ypred) 
- cr = classification_report(ytest,ypred) 
- print('confusion_matrix:',cm) 
- print('\nclassification_report:',cr) 
- cvs = cross_val_score(model,x,y,cv=5) 
- print('cross_val_score:',cvs) 
- print('\nMean:',np.mean(cvs)) 
-`;
-               var text13 = `
-from sklearn.model_selection import train_test_split 
-from sklearn.feature_extraction.text import TfidfVectorizer 
-from sklearn.multioutput import MultiOutputClassifier 
-from sklearn.naive_bayes import MultinomialNB 
-from sklearn.metrics import accuracy_score, classification_report 
-document = ["This is a positive document about technologies","negative statements towards politics in this document","A positive review of a new movie release","This document talks about technologies and politics","No specific statement in the genersl document"] 
-label = {'technologies':[1,0],'politics':[0,1],'positive_statement':[1,0],'negative_statement':[0,1]} 
-y = [label['technologies'],label['politics'],label['positive_statement'],label['technologies']+label['politics'],[]] 
-xtrain,xtest,ytrain,ytest = train_test_split(document,y,test_size=0.2) 
-v = TfidfVectorizer() 
-xtrain_Tfidf = v.fit_transform(xtrain) 
-xtest_Tfidf = v.transform(xtest) 
-from sklearn.preprocessing import MultiLabelBinarizer 
-mlb = MultiLabelBinarizer() 
-ytrain = mlb.fit_transform(ytrain) 
-ytest = mlb.fit_transform(ytest) 
-model = MultiOutputClassifier(MultinomialNB()) 
-model.fit(xtrain_Tfidf,ytrain) 
-ypred = model.predict(xtest_Tfidf) 
-accuracy = accuracy_score(ytest,ypred) 
-cr = classification_report(ytest,ypred) 
-print("accuracy_score: ",accuracy) 
-print("\nclassification_report: ",cr)
-`;
-               var text14 = `
-import pandas as pd 
-import numpy as np 
-from scipy import stats 
-data = pd.read_csv(r"C:\Users\hp\Desktop\KC MScIT Part 1\Sem 2\ML\Assignment\employee_happiness_dataset.csv") 
-data.head(10) 
-x = data['Salary'] 
-y = data['Happiness'] 
-# Calculating the corelation coefficient 
-c = stats.pearsonr(x,y)[0] 
- print('C:',c) 
-if c>0.7: 
-  print('Strong Positive Correlation') 
-elif c>0.4: 
-  print('Moderate Positive Correlation') 
-elif c>0: 
-  print('Weak Positive Correlation') 
-elif c<0 and c>-0.4:
-  print('Weak Negative Correlation') 
-elif c<-0.7: 
-  print('Moderate Negative Correlation') 
-else: 
-  print('No Correlation')
-`;
         function copyText(text) {
             navigator.clipboard.writeText(text).then(function () {
                 document.getElementById('copiedMsg').innerHTML = "Text Copied"
