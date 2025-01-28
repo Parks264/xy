@@ -1,327 +1,325 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Copy Text Buttons</title>
-    <style>
-        button {
-            margin: 5px;
-        }
+text/x-generic index.php ( PHP script, ASCII text )
 
-        body {
-            /* background-color: #1F1D36; */
-            background-image: url("https://raw.githubusercontent.com/hel0118/sukuna/main/jujutsu-kaisen-sukuna-uhdpaper.com-4K-7.3063.jpg");
-            background-size: 100% auto;
-            /* Center the background image */
-            font-family: Arial, sans-serif;
-            text-align: center;
-            transition: 1s ease-in-out;
-        }
+<?php
 
-        @media only screen and (max-width: 600px) {
+// echo '<img src="under.jpg">';
+//  echo 123;exit;
+ 
+//echo phpversion();
+//exit();
+/**
+ * CodeIgniter
+ *
+ * An open source application development framework for PHP
+ *
+ * This content is released under the MIT License (MIT)
+ *
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ *
+ * @package	CodeIgniter
+ * @author	EllisLab Dev Team
+ * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+ * @link	https://codeigniter.com
+ * @since	Version 1.0.0
+ * @filesource
+ */
 
-            /* Adjust properties for screens with a maximum width of 600px (adjust as needed) */
-            body {
-                background-image: url("https://raw.githubusercontent.com/hel0118/sukuna/main/real_esrgan_Zoro.jpg");
-                background-size: 135%;
-                /* Auto size for smaller screens */
-                background-position: top;
-                /* Center the background image, crop from top */
-            }
-        }
+/*
+ *---------------------------------------------------------------
+ * APPLICATION ENVIRONMENT
+ *---------------------------------------------------------------
+ *
+ * You can load different configurations depending on your
+ * current environment. Setting the environment also influences
+ * things like logging and error reporting.
+ *
+ * This can be set to anything, but default usage is:
+ *
+ *     development
+ *     testing
+ *     production
+ *
+ * NOTE: If you change these, also change the error_reporting() code below
+ */
+	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
 
-
-        button {
-            color: #ccc;
-            margin: 10px;
-            padding: 10px;
-            font-size: 16px;
-            background-color: #dddddd00;
-            /* Light gray button background */
-            border: 1px solid #aaa;
-            /* Dark gray border */
-            cursor: pointer;
-            transition: 500ms ease-in-out;
-        }
-
-        button:hover {
-            color: darkslategrey;
-            background-color: #ccc;
-            /* Slightly darker background on hover */
-        }
-    </style>
-</head>
-
-<body>
-
-    <button onclick="copyText(text1)">prc1 MVC Model</button>
-    <button onclick="copyText(text2)">prc2 Rest API(Web App)</button>
-    <button onclick="copyText(text3)">prc3 Working With Docker</button>
-    <button onclick="copyText(text4)">prc4 Installing s/w packages on docker </button>
-    <button onclick="copyText(text5)">prc5 docker volumes & networks</button>
-    <button onclick="copyText(text6)">prc6 Circle CI</button>
-    <button onclick="copyText(text7)">prc7 Backing Service </button>
-    <button onclick="copyText(text8)">prc8 Pie Diagram, Bar Chart Diagram</button>
-    
-    <p id="copiedMsg"></p>
-    <script>
-        var text1 = `
-Step 1: create a folder
-Step 2: create MVC project using “dotnet new mvc --auth none”(in cmd prmpt)
-Step 3: Go to controllers folder and modify HomeController.cs file
-
-namespace MyMVC.Controllers
+/*
+ *---------------------------------------------------------------
+ * ERROR REPORTING
+ *---------------------------------------------------------------
+ *
+ * Different environments will require different levels of error reporting.
+ * By default development will show errors but testing and live will hide them.
+ */
+switch (ENVIRONMENT)
 {
- public class HomeController:Controller
- {
-  public string Index()
-  {
-   return "Hello World";
-  }
- }
+	case 'development':
+		error_reporting(-1);
+		ini_set('display_errors', 1);
+	break;
+
+	case 'testing':
+	case 'production':
+		ini_set('display_errors', 0);
+		if (version_compare(PHP_VERSION, '5.3', '>='))
+		{
+			error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED & ~E_STRICT & ~E_USER_NOTICE & ~E_USER_DEPRECATED);
+		}
+		else
+		{
+			error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT & ~E_USER_NOTICE);
+		}
+	break;
+
+	default:
+		header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
+		echo 'The application environment is not set correctly.';
+		exit(1); // EXIT_ERROR
 }
 
-Step 4: Run the project using “dotnet run”.(in cmd prmpt)
-Step 5: Go to Models folder and add new file StockQuote.cs to it with following content.
-
-using System;
-namespace MyMVC.Models
-{
- public class StockQuote
- {
-  public int Price {get;set;}
-  public string stockname {get;set;}
- }
-}
-
-Step 6: Inside the Views folder edit Index.cshtml file
-
-@{
-  ViewData["Title"]="Your Name";
-}
-<div>
-  Stock Name:@Model.stockname</br>
-  Price:$@Model.Price
-</div>
-
-Step 7: Now modify HomeController.cs file to match following
- namespace MyMVC.Controllers
-{
- public class HomeController : Controller
- {
-  public async Task<IActionResult> Index()
- {
-   var model=new StockQuote{stockName="Your Name",Price=100};
-   return View(model);
- }
- }
-}
-
-Step 8: Run the project using dotnet run
-`;
-
-        var text2 = `
-Step 1: Open two command prompts
-Command prompt 1: Command: dotnet new webapi -o Glossary
-Command Prompt 2: Command: curl --insecure https://localhost:5001/weatherforecast
-
-Step 2: To get started, remove the WeatherForecast.cs file from the root 
-of the project and the WeatherForecastController.cs file from the Controllers folder. Add 
-Following two files
-1) D:\Glossary\GlossaryItem.cs (type it in notepad and save as all files)
-2) D:\Glossary\Controllers\ GlossaryController.cs (type it in notepad and save as all files)
-
-Step 3: Now stop running previous dotnet run on 
-command prompt 1 using Ctrl+C. and Run it again for new code. 
-On Command prompt1:dotnet run
-On Command prompt2: Getting a list of items: Command: curl --insecure http://localhost:5176/api/glossary
-
-1.Getting a single item:
-Command: curl --insecure https://localhost:5001/api/glossary/MVC
-
-2.Creating an item:
-Command: curl --insecure -X POST -d "{\"term\": \"MFA\", \"definition\":\"An authentication process.\"}" -H 
-"Content-Type:application/json" http://localhost:5227/api/glossary
-
-3.Update Item:
-Command: curl --insecure -X PUT -d "{\"term\": \"MVC\", \"definition\":\"Modified record of Model 
-View Controller.\"}" -H "Content-Type:application/json" http://localhost:5227/api/glossary
-
-4.Delete Item:
-Command: curl --insecure --request DELETE --url http://localhost:5227/api/glossary/openid
-
-`;
-        var text3 = `
-Method 1: To pull and push images using docker
-1.To check docker version: docker –-version 
-2.To pull readymade image: docker pull rocker/verse
-3.To check images in docker: docker images
-
-4.Login to docker hub and create repository using below mentioned link.
-Link: https://hub.docker.com/
-
-5.Command To login to your docker account: docker login –u <username> 
-password: (docker hub > ID > My Account > Security > Create an Access Token)
-
-6.Command to push image to docker hub account: docker push <username>/<repository name>:<Tag name>
-
-7.Check it in docker hub now.
-
-Method 2: Build an image then push it to docker and run it.
-
-1.Command to create docker file:
-cat > Dockerfile <<EOF 
-FROM busybox 
-CMD echo "Hello world! This is my first Docker image." 
-EOF 
-
-2.Command to build image from docker file: docker build -t <username>/<repository name>
-
-3.docker images 
-
-4.Command to push image to docker hub: docker push <username>/<repository name>
-
-5.Command to run docker image: docker run <username>/<repository name> 
-
-`;
-
-        var text4 = `
-Step 1: Go to CLI Option on the container in Docker Desktop
-Step 2: apt-get -y update 
-Step 3: apt-get -y install firefox
-        apt-get -y install vim
-
-Step 4: Run vim to verify if the software package has been installed
-Working with Docker Volumes:
-1.creating volume (docker volume create myvol)
-2.listing volumes (docker volume ls)
-3.getting details of our volume (docker volume inspect myvol)
-4.removing volume (docker volume rm myvol)
-`;
-
-        var text5 = `
-Step 1
-a) docker pull nginx – nginx 
-b) docker run -it –name=webApp -d -p 80:80 nginx
-
-Step 2: Click on Port and enter 80 in the dropdown window and click OK
-
-Step 3: 
-docker exec -it WebApp bash
-Cd /usr/share/nginx/html
-Echo “Hello Welcome to updated nginx Page.”> index.html
-exit
-
-Step 4: docker ps
-
-Step 5: 
-Docker run -it –name=WebApp1 -d -p 80:80 nginx
-
-Step 6: Click on port and enter 80 in the dropdown and click ok
-
-Step 7: Creation of Volume(MyVolume)
-Command:
-a) docker volume create MyVolume
-b) docker volume ls
-c) docker volume inspect MyVolume
-d) docker stop WebApp1
-
-Step 8: Create a container (WebApp2) inside the container MyVolume
-docker run -d –name = WebApp2 –mount 
-source=MyVolume,destination=/usr/share/nginx/html –p 80:80 nginx
-
-Step 9: Enter the below commands:
-a) ls /
-b) cd /var/lib/docker
-c) ls
-d) cd volumes
-e) ls
-f) cd MyVolume
-g) ls
-h) cd _data
-
-`;
-
-        var text6 = `
-Step-1: - Let's initiate the process with these fundamental steps: Log in to GitHub. & Create a public 
-repository named Sabar, ensuring to include a README file.
-
-Step-2: Login to Circle ci with GitHub login & Navigate to Projects tab where you will find the repositories you have created. Once you find the hello-world repository click on setup project.
-
-Step-3: Select Faster and click on setup project.
-
-Step-4:"In GitHub, navigate to the 'hello-world' repository, then proceed to the 'circlrci-project' branch and open the 'config.yml' file."
-
-Step-5: Edit the config file and commit changes
-
-Step-6: We can now see that the updates from GitHub are being logged, and the message is being recorded for 
-smooth integration.
-
-
-
-`;
-
-        var text7 = `
-
-Step 1: docker run -d -p 5000:5000 -e PORT=5000 \-e LOCATION
-URL=http://localhost:5001 \dotnetcoreservices/teamservice:location
-
-Step 2:to run location service 
-docker run -d -p 5001:5001 -e PORT=5001 dotnetcoreservices/locationservice:nodb
-
-
-Step 3: : to check running images in docker $docker images
-
-Step 4:to create new team
-curl -H "Content-Type:application/json" -X POST -d \'{"id":"e52baa63-d511-
-417e-9e54-7aab04286281", "name":"KC"}' http://localhost:5000/teams
-
-Step 5: To confirm that team is added
-curl http://localhost:5000/teams/e52baa63-d511-417e-9e54-7aab04286281
-
-Step 6: to add new member to team
-curl -H "Content-Type:application/json" -X POST -d \'{"id":"63e7acf8-8fae42ce-9349-3c8593ac8292", "firstName":"Kirti", "lastName":"Bhatt"}'
-http://localhost:5000/teams/e52baa63-d511-417e-9e54-
-7aab04286281/members
-
-Step 7: To confirm member added
-curl http://localhost:5000/teams/e52baa63-d511-417e-9e54-7aab04286281
-
-Step 8: To add location for member
-curl -H "Content-Type:application/json" -X POST -d \'{"id":"64c3e69f-1580-
-4b2f-a9ff-2c5f3b8f0e1f", "latitude":12.0,"longitude":12.0,"altitude":10.0,
-"timestamp":0,"memberId":"63e7acf8-8fae-42ce-9349-3c8593ac8292"}'
-http://localhost:5001/locations/63e7acf8-8fae-42ce-9349-3c8593ac8292
-
-
-`;
-
-        var text8 = `
-1.to inspect the available nodes in the cluster: 
-  cmd: kubectl get nodes 
-2.to observe the list of running pods: 
-  cmd: kubectl get pods
-3.to examine the available services within the cluster: 
-  cmd: kubectl get services
-
-
-`;
-
-        
-        function copyText(text) {
-            navigator.clipboard.writeText(text).then(function () {
-                document.getElementById('copiedMsg').innerHTML = "Text Copied"
-            }).catch(function (err) {
-                console.error('Unable to copy text', err);
-            });
-        }
-    </script>
-
-</body>
-
-</html>
-
-
+/*
+ *---------------------------------------------------------------
+ * SYSTEM DIRECTORY NAME
+ *---------------------------------------------------------------
+ *
+ * This variable must contain the name of your "system" directory.
+ * Set the path if it is not in the same directory as this file.
+ */
+	$system_path = 'system';
+
+/*
+ *---------------------------------------------------------------
+ * APPLICATION DIRECTORY NAME
+ *---------------------------------------------------------------
+ *
+ * If you want this front controller to use a different "application"
+ * directory than the default one you can set its name here. The directory
+ * can also be renamed or relocated anywhere on your server. If you do,
+ * use an absolute (full) server path.
+ * For more info please see the user guide:
+ *
+ * https://codeigniter.com/user_guide/general/managing_apps.html
+ *
+ * NO TRAILING SLASH!
+ */
+	$application_folder = 'application';
+
+/*
+ *---------------------------------------------------------------
+ * VIEW DIRECTORY NAME
+ *---------------------------------------------------------------
+ *
+ * If you want to move the view directory out of the application
+ * directory, set the path to it here. The directory can be renamed
+ * and relocated anywhere on your server. If blank, it will default
+ * to the standard location inside your application directory.
+ * If you do move this, use an absolute (full) server path.
+ *
+ * NO TRAILING SLASH!
+ */
+	$view_folder = '';
+
+
+/*
+ * --------------------------------------------------------------------
+ * DEFAULT CONTROLLER
+ * --------------------------------------------------------------------
+ *
+ * Normally you will set your default controller in the routes.php file.
+ * You can, however, force a custom routing by hard-coding a
+ * specific controller class/function here. For most applications, you
+ * WILL NOT set your routing here, but it's an option for those
+ * special instances where you might want to override the standard
+ * routing in a specific front controller that shares a common CI installation.
+ *
+ * IMPORTANT: If you set the routing here, NO OTHER controller will be
+ * callable. In essence, this preference limits your application to ONE
+ * specific controller. Leave the function name blank if you need
+ * to call functions dynamically via the URI.
+ *
+ * Un-comment the $routing array below to use this feature
+ */
+	// The directory name, relative to the "controllers" directory.  Leave blank
+	// if your controller is not in a sub-directory within the "controllers" one
+	// $routing['directory'] = '';
+
+	// The controller class file name.  Example:  mycontroller
+	// $routing['controller'] = '';
+
+	// The controller function you wish to be called.
+	// $routing['function']	= '';
+
+
+/*
+ * -------------------------------------------------------------------
+ *  CUSTOM CONFIG VALUES
+ * -------------------------------------------------------------------
+ *
+ * The $assign_to_config array below will be passed dynamically to the
+ * config class when initialized. This allows you to set custom config
+ * items or override any default config values found in the config.php file.
+ * This can be handy as it permits you to share one application between
+ * multiple front controller files, with each file containing different
+ * config values.
+ *
+ * Un-comment the $assign_to_config array below to use this feature
+ */
+	// $assign_to_config['name_of_config_item'] = 'value of config item';
+
+
+
+// --------------------------------------------------------------------
+// END OF USER CONFIGURABLE SETTINGS.  DO NOT EDIT BELOW THIS LINE
+// --------------------------------------------------------------------
+
+/*
+ * ---------------------------------------------------------------
+ *  Resolve the system path for increased reliability
+ * ---------------------------------------------------------------
+ */
+
+	// Set the current directory correctly for CLI requests
+	if (defined('STDIN'))
+	{
+		chdir(dirname(__FILE__));
+	}
+
+	if (($_temp = realpath($system_path)) !== FALSE)
+	{
+		$system_path = $_temp.DIRECTORY_SEPARATOR;
+	}
+	else
+	{
+		// Ensure there's a trailing slash
+		$system_path = strtr(
+			rtrim($system_path, '/\\'),
+			'/\\',
+			DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR
+		).DIRECTORY_SEPARATOR;
+	}
+
+	// Is the system path correct?
+	if ( ! is_dir($system_path))
+	{
+		header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
+		echo 'Your system folder path does not appear to be set correctly. Please open the following file and correct this: '.pathinfo(__FILE__, PATHINFO_BASENAME);
+		exit(3); // EXIT_CONFIG
+	}
+
+/*
+ * -------------------------------------------------------------------
+ *  Now that we know the path, set the main path constants
+ * -------------------------------------------------------------------
+ */
+	// The name of THIS file
+	define('SELF', pathinfo(__FILE__, PATHINFO_BASENAME));
+
+	// Path to the system directory
+	define('BASEPATH', $system_path);
+
+	// Path to the front controller (this file) directory
+	define('FCPATH', dirname(__FILE__).DIRECTORY_SEPARATOR);
+
+	// Name of the "system" directory
+	define('SYSDIR', basename(BASEPATH));
+
+	// The path to the "application" directory
+	if (is_dir($application_folder))
+	{
+		if (($_temp = realpath($application_folder)) !== FALSE)
+		{
+			$application_folder = $_temp;
+		}
+		else
+		{
+			$application_folder = strtr(
+				rtrim($application_folder, '/\\'),
+				'/\\',
+				DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR
+			);
+		}
+	}
+	elseif (is_dir(BASEPATH.$application_folder.DIRECTORY_SEPARATOR))
+	{
+		$application_folder = BASEPATH.strtr(
+			trim($application_folder, '/\\'),
+			'/\\',
+			DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR
+		);
+	}
+	else
+	{
+		header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
+		echo 'Your application folder path does not appear to be set correctly. Please open the following file and correct this: '.SELF;
+		exit(3); // EXIT_CONFIG
+	}
+
+	define('APPPATH', $application_folder.DIRECTORY_SEPARATOR);
+
+	// The path to the "views" directory
+	if ( ! isset($view_folder[0]) && is_dir(APPPATH.'views'.DIRECTORY_SEPARATOR))
+	{
+		$view_folder = APPPATH.'views';
+	}
+	elseif (is_dir($view_folder))
+	{
+		if (($_temp = realpath($view_folder)) !== FALSE)
+		{
+			$view_folder = $_temp;
+		}
+		else
+		{
+			$view_folder = strtr(
+				rtrim($view_folder, '/\\'),
+				'/\\',
+				DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR
+			);
+		}
+	}
+	elseif (is_dir(APPPATH.$view_folder.DIRECTORY_SEPARATOR))
+	{
+		$view_folder = APPPATH.strtr(
+			trim($view_folder, '/\\'),
+			'/\\',
+			DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR
+		);
+	}
+	else
+	{
+		header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
+		echo 'Your view folder path does not appear to be set correctly. Please open the following file and correct this: '.SELF;
+		exit(3); // EXIT_CONFIG
+	}
+
+	define('VIEWPATH', $view_folder.DIRECTORY_SEPARATOR);
+
+/*
+ * --------------------------------------------------------------------
+ * LOAD THE BOOTSTRAP FILE
+ * --------------------------------------------------------------------
+ *
+ * And away we go...
+ */
+require_once BASEPATH.'core/CodeIgniter.php';
 
